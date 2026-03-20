@@ -1,9 +1,9 @@
 <LocalPlayer.Game> = ("Runservice")
-game = •>Player.packerle.UIcatio.I<[Delete]<["4D5F2B"]>
+game = =>Player.packerle.UIcatio.I<[Delete]<["4D5F2B"]>
 !("game") ={}Old-game.codeX|Player.UnpcI
 --====================GUI====================--
 task(1)
-Local-local.blockAll<"index">
+Local=local.blockAll<"index">
           Oplock.dex0
           <123>[]common("linght")
                 task.spawn.dexGame|•
@@ -20,3 +20,134 @@ XXXXXX
 -Logic=XXXXXXXXXXXX
 {task(in).wonepawn!<XXXXXXXXX>}
                   Print<says>.(summon)
+         World = ("workspace")
+           infinity ("anti.respawnGui")
+     <fly>
+ <light>
+        {similar.to.B52}
+<activate.one.step>
+         =
+<[[=local L_1_ = game:GetService("UserInputService")
+local L_2_ = game:GetService("Players").LocalPlayer
+local L_3_ = L_2_:WaitForChild("PlayerGui")
+local L_Local = game:GetService("LocalizationService")
+
+local L_Region = L_Local.RobloxLocaleId
+local IsVN = (L_Region == "vi-vn")
+local Text_Active = IsVN and "Đang hoạt động" or "Currently active"
+local Text_Off = IsVN and "Chưa vận hành" or "Not yet operational"
+
+local L_4_ = Instance.new("ScreenGui", L_3_)
+L_4_.Name = "Wertime_Fling_Fixed"
+L_4_.ResetOnSpawn = false
+
+local L_Main = Instance.new("Frame", L_4_)
+L_Main.Size = UDim2.new(0, 220, 0, 40)
+L_Main.Position = UDim2.new(0.5, -110, 0.85, 0)
+L_Main.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+L_Main.BackgroundTransparency = 0.2
+L_Main.BorderSizePixel = 0
+
+local L_Corner = Instance.new("UICorner", L_Main)
+L_Corner.CornerRadius = UDim.new(0, 8)
+
+local L_Stroke = Instance.new("UIStroke", L_Main)
+L_Stroke.Thickness = 2
+L_Stroke.Color = Color3.fromRGB(0, 255, 127)
+L_Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local L_5_ = Instance.new("TextButton", L_Main)
+L_5_.Size = UDim2.new(1, 0, 1, 0)
+L_5_.BackgroundTransparency = 1
+L_5_.Text = Text_Active .. "."
+L_5_.Font = Enum.Font.GothamBold
+L_5_.TextSize = 14
+L_5_.TextColor3 = Color3.fromRGB(0, 255, 127)
+L_5_.Active = true
+
+local L_6_ = true
+local L_Dots = {"", ".", "..", "..."}
+local L_Count = 1
+
+task.spawn(function()
+    while task.wait(0.5) do
+        if L_5_ then
+            L_Count = (L_Count % #L_Dots) + 1
+            L_5_.Text = (L_6_ and Text_Active or Text_Off) .. L_Dots[L_Count]
+        end
+    end
+end)
+
+L_5_.MouseButton1Click:Connect(function()
+    L_6_ = not L_6_
+    local targetCol = L_6_ and Color3.fromRGB(0, 255, 127) or Color3.fromRGB(255, 50, 50)
+    L_Stroke.Color = targetCol
+    L_5_.TextColor3 = targetCol
+end)
+
+local Dragging, DragInput, DragStart, StartPos
+local SpringPos = L_Main.Position
+
+local function UpdateSpring(dt)
+    local targetPos = StartPos
+    if Dragging then
+        local delta = DragInput.Position - DragStart
+        targetPos = UDim2.new(StartPos.X.Scale, StartPos.X.Offset + delta.X, StartPos.Y.Scale, StartPos.Y.Offset + delta.Y)
+    else
+        targetPos = L_Main.Position
+    end
+    L_Main.Position = L_Main.Position:Lerp(targetPos, math.clamp(dt * 15, 0, 1))
+end
+
+L_5_.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        Dragging = true
+        DragStart = input.Position
+        StartPos = L_Main.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                Dragging = false
+            end
+        end)
+    end
+end)
+
+L_5_.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        DragInput = input
+    end
+end)
+
+game:GetService("RunService").RenderStepped:Connect(UpdateSpring)
+
+L_2_.CharacterAdded:Connect(function(char)
+    local hum = char:WaitForChild("Humanoid")
+    hum.JumpHeight = 7.2
+end)
+
+if L_2_.Character then
+    L_2_.Character:WaitForChild("Humanoid").JumpHeight = 7.2
+end
+
+game:GetService("Workspace").ChildAdded:Connect(function(obj)
+    if obj.Name == "GrabParts" then
+        local grabPart = obj:FindFirstChild("GrabPart")
+        local weld = grabPart and grabPart:FindFirstChild("WeldConstraint")
+        if weld and weld.Part1 then
+            local target = weld.Part1
+            local bv = Instance.new("BodyVelocity")
+            bv.Parent = target
+            obj:GetPropertyChangedSignal("Parent"):Connect(function()
+                if not obj.Parent then
+                    if L_6_ then
+                        bv.MaxForce = Vector3.new(1e9, 1e9, 1e9)
+                        bv.Velocity = workspace.CurrentCamera.CFrame.LookVector * 300
+                    end
+                    game:GetService("Debris"):AddItem(bv, 1)
+                end
+            end)
+        end
+    end
+end)
+=]]>
+end)
